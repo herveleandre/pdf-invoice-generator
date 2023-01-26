@@ -14,7 +14,6 @@ for filepath in filepaths:
     pdf.set_font(family="Times", size=16, style="B")
     pdf.cell(w=50, h=8, txt=f"Invoice Number: {invoice_number}", ln=1)
 
-
     pdf.set_font(family="Times", size=16, style="B")
     pdf.cell(w=50, h=8, txt=f"Date: {dates}", ln=1)
 
@@ -38,10 +37,4 @@ for filepath in filepaths:
         pdf.cell(w=30, h=8, txt=str(row["price_per_unit"]), border=1)
         pdf.cell(w=30, h=8, txt=str(row["total_price"]), border=1, ln=1)
 
-
-
-
-
     pdf.output(f"PDFs/{filename}.pdf")
-
-
