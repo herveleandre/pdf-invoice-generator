@@ -3,6 +3,7 @@ import glob
 from fpdf import FPDF
 from pathlib import Path
 
+
 filepaths = glob.glob("Invoices/*.xlsx")
 
 for filepath in filepaths:
@@ -28,6 +29,8 @@ for filepath in filepaths:
     pdf.cell(w=30, h=8, txt=columns[3], border=1)
     pdf.cell(w=30, h=8, txt=columns[4], border=1, ln=1)
 
+
+
     for index, row in df.iterrows():
         pdf.set_font(family="Times", size=10)
         pdf.set_text_color(100, 100, 100)
@@ -37,4 +40,27 @@ for filepath in filepaths:
         pdf.cell(w=30, h=8, txt=str(row["price_per_unit"]), border=1)
         pdf.cell(w=30, h=8, txt=str(row["total_price"]), border=1, ln=1)
 
+    total = df["total_price"].sum()
+    pdf.set_font(family="Times", size=10)
+    pdf.set_text_color(100, 100, 100)
+    pdf.cell(w=30, h=8, txt="", border=1)
+    pdf.cell(w=60, h=8, txt="", border=1)
+    pdf.cell(w=40, h=8, txt="", border=1)
+    pdf.cell(w=30, h=8, txt="", border=1)
+
+    pdf.cell(w=30, h=8, txt=str(total), border=1, ln=1)
+
+    pdf.set_font(family="Times", size=14, style="B")
+    pdf.set_text_color(250, 0, 0)
+    pdf.cell(w=30, h=8, txt=str(f"Total Price is: ${total}"), ln=1)
+
+    pdf.set_font(family="Times", size=14, style="B")
+    pdf.set_text_color(104, 50, 122)
+    pdf.cell(w=50, h=8, txt=f"HerveLeandre.com")
+    pdf.image("photo.png", w=10)
+
+
+
+    print(df["total_price"].sum())
     pdf.output(f"PDFs/{filename}.pdf")
+
